@@ -21,6 +21,8 @@ public class Zoo {
         animals.put("dora", new Pig("dora"));
         animals.put("wally", new Tiger("wally"));
         animals.put("marty", new Zebra("marty"));
+        animals.put("bart", new Giraffe("bart")); //new animal 1
+        animals.put("rick", new Bear("rick")); //new animal 2
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Voer uw command in: ");
@@ -28,16 +30,21 @@ public class Zoo {
         String input = scanner.nextLine();
 
         boolean commandFound = false;
+        //Check if the input contains the command "hello"
         if (input.contains(commands[0])) {
+            //Split the input, so that we can separate the name from the command
             String[] parts = input.split(" ");
             String animalName = parts.length > 1 ? parts[1] : null;
 
+            //If the input only contains the command "hello", log the hello text of every animal
             if (input.equals(commands[0])) {
                 commandFound = true;
                 for (Animal animal : animals.values()) {
                     animal.sayHello();
                 }
-            } else {
+            }
+            //If the input also has a name, check if there is an animal with that name and log its hello text
+            else {
                 if (animalName != null) {
                     Animal animal = animals.get(animalName);
                     if (animal != null) {
@@ -48,6 +55,7 @@ public class Zoo {
             }
         }
 
+        //If command 1 is given, log the eatLeaves text of all the herbivore and omnivores
         if (input.equals(commands[1])) {
             commandFound = true;
             for (Animal animal : animals.values()) {
@@ -59,6 +67,7 @@ public class Zoo {
             }
         }
 
+        //If command 2 is given, log the eatMeat text of all the carnivore and omnivores
         if (input.equals(commands[2])) {
             commandFound = true;
             for (Animal animal : animals.values()) {
@@ -70,6 +79,7 @@ public class Zoo {
             }
         }
 
+        //If command 3 is given, log the trick of all the animals that can perform one
         if (input.equals(commands[3])) {
             commandFound = true;
             for (Animal animal : animals.values()) {
@@ -79,6 +89,7 @@ public class Zoo {
             }
         }
 
+        //If no command was found, log an error message
         if (!commandFound) {
             System.out.println("Unknown command: " + input);
         }
